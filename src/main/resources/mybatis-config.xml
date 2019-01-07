@@ -8,10 +8,15 @@
 			<setting name="useGeneratedKeys" value="true" />
 			<setting name="defaultExecutorType" value="REUSE" />
 		</settings>
+		
 		<typeAliases>
+			<!-- 기본 -->
 			<typeAlias type="java.lang.Integer" alias="int"/>
 		 	<typeAlias type="java.lang.String"	alias="String"/>
 			<typeAlias type="java.util.Map" alias="param" />
 			<typeAlias type="java.util.List" alias="list" />
+			
+			<!-- DTO -->
+			<typeAlias type="kr.co.front.main.MainDTO" alias="MainDTO"/>
 		</typeAliases>
 	</configuration>
