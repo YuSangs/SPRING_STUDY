@@ -2,13 +2,70 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring 
+		http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	
+	<!-- 
+		세팅 정보
+		스프링 버전 : 4.0.4.RELEASE
+		Java 버전 : jdk 1.8.0_101
+		Tomcat 버전 : 8 버전
+		
+		사용 라이브러리
+		MyBatis
+	 -->
+
 	<context:component-scan base-package="kr"> 
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+		
+	<context:annotation-config />
+	
+	<!-- MariaDB 데이터소스 -->
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://222.106.253.80:3306/ysboard?useSSL=false&amp;serverTimezone=UTC"/>
+		<property name="username" value="ysboard" />
+		<property name="password" value="inter_ysboard" />
+		<property name="maxActive" value="10"/>
+		<property name="maxWait" value="6000"/>
+		<property name="poolPreparedStatements" value="true"/>
+		<property name="defaultAutoCommit" value="true"/>
+		<property name="initialSize" value="10"/>
+		<property name="maxIdle" value="10"/>
+		<property name="validationQuery" value="select 1 from dual"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+	
+	<!-- DB 로그 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL         :  " />
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- myBatis -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" >
+			<value>classpath:/mybatis-config.xml</value>
+		</property>
+		<property name="typeAliasesPackage" value="com.iedu.sql" />
+		<property name="mapperLocations" value="classpath:kr/co/sql/*Mapper.xml"/>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 		
 </beans>
