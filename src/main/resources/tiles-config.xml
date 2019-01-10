@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<!-- 
+	tiles3 설정 순서
+	1. maven 3개 등록 > tiles-jsp, tiles-core, tiles-servlet
+	2. servlet-context 설정 > jsp 매핑보다 더 먼저 동작하게 설정해야 함(order로 순서 변경)
+	3. tiles 설정파일 생성(tiles-config.xml)
+	4. 헤더, 푸터 등 include 파일 생성
+	5. 레이아웃 생성 후 tiles 태그로 헤더, 푸터, 콘텐츠 붙이기
+	
+	주의점
+	1. tiles3은 스프링 3.2버전 이상부터 지원함
+	2. name 값은 컨트롤러에서 return 값과 매핑해야 tiles 동작함
+	3. JSTL (c태그 등) 레이아웃에 붙여도 콘텐츠에서 인식이 안됨 콘텐츠에 직접 붙이거나 include해야함
+ -->
+
+<tiles-definitions>
+	<definition name="main-template" template="/WEB-INF/views/front/include/layout.jsp">
+		<put-attribute name="title" value="Spring_Setting_V1" />
+		<put-attribute name="header" value="/WEB-INF/views/front/include/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/front/include/footer.jsp" />
+	</definition>
+	
+	<definition name="*/*" extends="main-template">
+		<put-attribute name="content" value="/WEB-INF/views/front/{1}/{2}.jsp"/>
+	</definition>
+</tiles-definitions>

@@ -22,7 +22,7 @@ public class MainController {
 	 * */
 	@RequestMapping("/main/main.do")
 	public ModelAndView main(@RequestParam Map<String, Object> param) throws Exception {
-		ModelAndView mav = new ModelAndView("front/main/main");
+		ModelAndView mav = new ModelAndView("main/main");
 		
 		mav.addObject("mainList", service.selectMain(param));
 		return mav;
