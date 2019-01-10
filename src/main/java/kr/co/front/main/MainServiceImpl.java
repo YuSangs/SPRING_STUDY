@@ -11,7 +11,7 @@ import kr.co.common.CommonDAO;
 public class MainServiceImpl extends CommonDAO implements MainService{
 
 	@Override
-	public List<?> main(Map<String, Object> param) {
+	public List<?> selectMain(Map<String, Object> param) throws Exception{
 		return super.list("main.main", param);
 	}
 

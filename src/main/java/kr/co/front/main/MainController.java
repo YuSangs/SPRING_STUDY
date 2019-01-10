@@ -24,7 +24,7 @@ public class MainController {
 	public ModelAndView main(@RequestParam Map<String, Object> param) throws Exception {
 		ModelAndView mav = new ModelAndView("front/main/main");
 		
-		mav.addObject("mainList", service.main(param));
+		mav.addObject("mainList", service.selectMain(param));
 		return mav;
 	}
 }

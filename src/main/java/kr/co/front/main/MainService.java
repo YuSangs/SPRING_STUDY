@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface MainService {
 
-	public List<?> main(Map<String, Object> param);
+	public List<?> selectMain(Map<String, Object> param) throws Exception;
 
 }
