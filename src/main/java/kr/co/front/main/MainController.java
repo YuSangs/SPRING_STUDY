@@ -29,14 +29,16 @@ public class MainController {
 	}
 	
 	/**
-	 * 웹소켓 채팅
+	 * 게시판 리스트
 	 * 
 	 * @param Map<String, Object>
 	 * @return ModelAndView
 	 * */
-	@RequestMapping("/main/chat.do")
-	public String webSocketChat() throws Exception {
-
-		return "main/echo";
+	@RequestMapping("/list/list.do")
+	public ModelAndView List(@RequestParam Map<String, Object> param) throws Exception {
+		ModelAndView mav = new ModelAndView("front/list/list");
+		mav.addObject("list", service.selectList(param));
+		return mav;
 	}
+	
 }

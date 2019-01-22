@@ -7,4 +7,8 @@
 		<select id="main" parameterType="param" resultType="MainDTO">
 			select * from tbl_study
 		</select>
+		
+		<select id="selectList" parameterType="param" resultType="param">
+			SELECT * FROM TBL_YS_LIST 
+		</select>
 	</mapper>

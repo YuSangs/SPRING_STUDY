@@ -15,4 +15,9 @@ public class MainServiceImpl extends CommonDAO implements MainService{
 		return super.list("main.main", param);
 	}
 
+	@Override
+	public Object selectList(Map<String, Object> param) {
+		return super.list("main.selectList", param);
+	}
+
 }
