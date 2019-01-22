@@ -27,4 +27,16 @@ public class MainController {
 		mav.addObject("mainList", service.selectMain(param));
 		return mav;
 	}
+	
+	/**
+	 * 웹소켓 채팅
+	 * 
+	 * @param Map<String, Object>
+	 * @return ModelAndView
+	 * */
+	@RequestMapping("/main/chat.do")
+	public String webSocketChat() throws Exception {
+
+		return "main/echo";
+	}
 }
