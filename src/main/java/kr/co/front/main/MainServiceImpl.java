@@ -16,8 +16,12 @@ public class MainServiceImpl extends CommonDAO implements MainService{
 	}
 
 	@Override
-	public Object selectList(Map<String, Object> param) {
+	public int selectListCnt(Map<String, Object> param) throws Exception{
+		return Integer.parseInt(super.select("main.selectListCnt", param).toString());
+	}
+	
+	@Override
+	public List<?> selectList(Map<String, Object> param) throws Exception{
 		return super.list("main.selectList", param);
 	}
-
 }

@@ -8,7 +8,32 @@
 			select * from tbl_study
 		</select>
 		
+		<select id="selectListCnt" parameterType="param" resultType="object">
+			SELECT 
+				COUNT(IDX) 
+			FROM 
+				TBL_YS_LIST
+		</select>
+		
 		<select id="selectList" parameterType="param" resultType="param">
-			SELECT * FROM TBL_YS_LIST 
+			SELECT
+				B.*
+			FROM
+				(SELECT 
+					@ROWNUM:=@ROWNUM+1 AS ROWNUM
+					, A.*
+				FROM 
+					(SELECT 
+						IDX
+						, TITLE
+						, CONTENT
+						, REGDATE
+						, UPDDATE
+					FROM 
+						TBL_YS_LIST
+					ORDER BY IDX DESC) A, 
+					(SELECT @ROWNUM:=0) R ) B
+			WHERE 
+				B.ROWNUM BETWEEN #{pageBegin} AND #{pageEnd}
 		</select>
 	</mapper>

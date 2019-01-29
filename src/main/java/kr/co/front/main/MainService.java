@@ -7,6 +7,8 @@ public interface MainService {
 
 	public List<?> selectMain(Map<String, Object> param) throws Exception;
 
-	public Object selectList(Map<String, Object> param);
-
+	public int selectListCnt(Map<String, Object> param) throws Exception;
+	
+	public List<?> selectList(Map<String, Object> param) throws Exception;
+	
 }

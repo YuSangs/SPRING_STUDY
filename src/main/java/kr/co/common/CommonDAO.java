@@ -17,7 +17,7 @@ public class CommonDAO {
 		return sqlSession.selectList(statement, param);
 	}
 
-	public Map<String, Object> select(String statement, Map<String, Object> param) {
+	public Object select(String statement, Map<String, Object> param) {
 		return sqlSession.selectOne(statement, param);
 	}
 
