@@ -2,12 +2,17 @@ package kr.co.front.main;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.common.CommonFile;
 import kr.co.common.ListPager;
 
 @Controller
@@ -55,4 +60,50 @@ public class MainController {
 		return mav;
 	}
 	
+	/**
+	 * 게시판 글작성 페이지
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/list/writeForm")
+	public String writeForm(@RequestParam Map<String, Object> param) throws Exception {
+		
+		return "front/list/writeForm";
+	}
+	
+	/**
+	 * 게시판 글작성
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/list/writeProc")
+	public String writeProc(@RequestParam Map<String, Object> param, MultipartHttpServletRequest multi) throws Exception {
+		
+		int result = service.writeProc(param, multi);
+		
+		if(result == 1) {
+			System.out.println("글작성 성공");
+		}else {
+			System.out.println("글작성 실패");
+		}
+		
+		return "redirect:/list/list.do";
+	}
+	
+	/**
+	 * 첨부파일 다운로드
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/download")
+	public void download(@RequestParam Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		CommonFile commonFile = new CommonFile();
+		
+		Map<String, Object> map = service.download(param);
+		
+		commonFile.fileDownload(request, response, map);
+	}
 }

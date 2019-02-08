@@ -29,11 +29,29 @@
 						, CONTENT
 						, REGDATE
 						, UPDDATE
+						, ORIGIN_FILE
 					FROM 
 						TBL_YS_LIST
 					ORDER BY IDX DESC) A, 
 					(SELECT @ROWNUM:=0) R ) B
 			WHERE 
 				B.ROWNUM BETWEEN #{pageBegin} AND #{pageEnd}
+		</select>
+		
+		<insert id="insertWriteProc" parameterType="param">
+			INSERT INTO 
+				TBL_YS_LIST (TITLE, CONTENT, REGDATE, ORIGIN_FILE, STORED_FILE, FILE_PATH) 
+				VALUES (#{title}, #{content}, NOW(), #{origin_file}, #{stored_file}, #{file_path})
+		</insert>
+		
+		<select id="selectDownload" parameterType="param" resultType="param">
+			SELECT 
+				ORIGIN_FILE
+				, STORED_FILE
+				, FILE_PATH
+			FROM
+				TBL_YS_LIST
+			WHERE
+				IDX = #{idx}
 		</select>
 	</mapper>

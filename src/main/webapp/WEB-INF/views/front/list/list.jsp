@@ -8,6 +8,7 @@
 			<td>번호</td>
 			<td>제목</td>
 			<td>내용</td>
+			<td>첨부파일</td>
 			<td>게시일자</td>
 		</tr>
 	</thead>
@@ -17,6 +18,7 @@
 				<td>${(listPager.listCnt - status.index) - ((listPager.curPage - 1) * 10) }</td>
 				<td>${list.TITLE }</td>
 				<td>${list.CONTENT }</td>
+				<td><a href="javascript:download('${list.IDX }');">${list.ORIGIN_FILE }</a></td>
 				<td>${list.REGDATE }</td>
 			</tr>
 		</c:forEach>
@@ -25,6 +27,7 @@
 
 <form id="commonForm" method="post">
 	<input type="hidden" id="curPage" name="curPage"/> <!-- 이동할 페이지 번호 -->
+	<input type="hidden" id="idx" name="idx"/>
 </form>
 
 <!-- 페이징 처리 -->
@@ -45,10 +48,28 @@
 <a href="javascript:listPaging('${listPager.nextBlock }')">다음 블록 첫 페이지</a>
 <a href="javascript:listPaging('${listPager.pageCnt }')">완전 끝 페이지</a>
 
+<button onclick="writeForm();">글작성</button>
+
 <script type="text/javascript">
 	function listPaging(pageNum){
 		$("#curPage").val(pageNum);
 		$("#commonForm").prop("action", "/list/list.do");
+		$("#commonForm").submit();
+	}
+	
+	function writeForm(){
+		$("#commonForm").prop("action", "/list/writeForm.do");
+		$("#commonForm").submit();
+	}
+	
+	function writeForm(){
+		$("#commonForm").prop("action", "/list/writeForm.do");
+		$("#commonForm").submit();
+	}
+	
+	function download(idx){
+		$("#idx").val(idx);
+		$("#commonForm").prop("action", "/download.do");
 		$("#commonForm").submit();
 	}
 </script>

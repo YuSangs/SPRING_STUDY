@@ -9,8 +9,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<tiles:insertAttribute name="header" />
-		<tiles:insertAttribute name="content" />
-		<tiles:insertAttribute name="footer" />
+		<div>
+			<tiles:insertAttribute name="header" />
+		</div>
+		<div>
+			<tiles:insertAttribute name="content" />
+		</div>
+		<div>
+			<tiles:insertAttribute name="footer" />
+		</div>
 	</body>
 </html>

@@ -46,4 +46,11 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<multipart-config>
+		<!-- 100MB max -->
+		<max-file-size>104857600</max-file-size>
+		<max-request-size>104857600</max-request-size>
+		<file-size-threshold>0</file-size-threshold>
+	</multipart-config>
+	
 </web-app>

@@ -16,7 +16,7 @@
 	
 	<!-- 
 		세팅 정보
-		스프링 버전 : 4.0.4.RELEASE
+		스프링 버전 : 4.3.9.RELEASE
 		Java 버전 : jdk 1.8.0_101
 		Tomcat 버전 : 8 버전
 		
@@ -73,7 +73,13 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
-		
+	
+	<!-- 파일 첨부 크기 설정 --> 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="15000000"/>
+		<property name="maxInMemorySize" value="15000000"/>
+	</bean>
+	
 	<!-- Transaction Manager -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
 		<property name="dataSource" ref="dataSource" /> 
