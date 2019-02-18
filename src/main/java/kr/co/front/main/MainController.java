@@ -1,5 +1,6 @@
 package kr.co.front.main;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,5 +106,21 @@ public class MainController {
 		Map<String, Object> map = service.download(param);
 		
 		commonFile.fileDownload(request, response, map);
+	}
+	
+	/**
+	 * 엑셀 다운로드 시도
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/excelDownload")
+	public void excelDownload(@RequestParam Map<String, Object> param, HttpServletResponse response) throws Exception {
+		CommonFile commonFile = new CommonFile();
+		
+		List<Map<String, Object>> excelDataList = null;
+		
+		commonFile.ExcelDownloadPoi(response, excelDataList, param.get("fileName").toString());
+		
 	}
 }

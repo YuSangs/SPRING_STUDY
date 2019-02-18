@@ -16,6 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -27,7 +34,6 @@ public class CommonFile {
 	 * @param MultipartHttpServletRequest
 	 * @param String
 	 * @return List<Map<String, Object>>
-	 * 
 	 * */
 	public List<Map<String, Object>> fileUpload(MultipartHttpServletRequest multi, String path) {
 		
@@ -83,7 +89,6 @@ public class CommonFile {
 	 * @param HttpServletRequest
 	 * @param HttpServletResponse
 	 * @param String
-	 * 
 	 * */
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map){
 		
@@ -112,5 +117,80 @@ public class CommonFile {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * 엑셀 다운로드(.xls)
+	 * @param HttpServletResponse
+	 * @param List<Map<String, Object>>
+	 * @param String
+	 * 
+	 * poi 버전 : 3.17 
+	 * */
+	public void ExcelDownloadPoi(HttpServletResponse response, List<Map<String, Object>> excelDataList, String fileName){
+		
+		//엑셀 읽기, 쓰기 API 세트 (HSSF)
+		HSSFWorkbook objWorkBook = new HSSFWorkbook();
+		HSSFSheet objSheet = null;
+		HSSFRow objRow = null;
+		HSSFCell objCell = null;
+		
+		HSSFFont font = objWorkBook.createFont();
+		font.setFontHeightInPoints((short)9);
+		font.setBold(true); //폰트 굵기 설정 
+//		font.setBold((short)font.BOLDWEIGHT_BOLD); 폰트 굵기 설정 버전 : 3.11 이하
+		font.setFontName("맑은고딕");
+
+		//제목 스타일에 폰트 적용, 정렬
+		HSSFCellStyle styleHd = objWorkBook.createCellStyle();    //제목 스타일
+		styleHd.setFont(font);
+//		styleHd.setAlignment(HSSFCellStyle.ALIGN_CENTER); //가운데 정렬 설정
+//		styleHd.setVerticalAlignment (HSSFCellStyle.VERTICAL_CENTER); //수직 중앙 정렬 설정
+		
+		objSheet = objWorkBook.createSheet("첫번째 시트");     //워크시트 생성
+		
+		// 제목 행
+		objRow = objSheet.createRow(0);
+		objRow.setHeight ((short) 0x150);
+		
+		objCell = objRow.createCell(0);
+		objCell.setCellValue("번호");
+		objCell.setCellStyle(styleHd);
+		
+		objCell = objRow.createCell(1);
+		objCell.setCellValue("이름");
+		objCell.setCellStyle(styleHd);
+		
+		//엑셀에 뿌려줄 데이터들
+		for(int i=0;i<excelDataList.size();i++) {
+			objRow = objSheet.createRow(i+1);
+			objRow.setHeight ((short) 0x150);
+			
+			objCell = objRow.createCell(0);
+			objCell.setCellValue(i+1);
+			objCell.setCellStyle(styleHd);
+			
+			objCell = objRow.createCell(1);
+			objCell.setCellValue(excelDataList.get(i).get("name").toString());
+			objCell.setCellStyle(styleHd);
+		}
+		
+		try {
+			response.setContentType("Application/Msexcel");
+			response.setHeader("Content-Disposition", "ATTachment; Filename="+URLEncoder.encode(fileName, "UTF-8") + ".xls");
+			objWorkBook.write(response.getOutputStream());
+		} catch (IOException e) {
+			System.out.println("엑셀 다운로드 중 오류 발생!");
+			e.printStackTrace();
+		}finally {
+			try {
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+			} catch (IOException e) {
+				System.out.println("아웃풋 스트림 닫는중 오류 발생!");
+				e.printStackTrace();
+			}
+		}	
 	}
 }

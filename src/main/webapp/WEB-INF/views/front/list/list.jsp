@@ -27,7 +27,8 @@
 
 <form id="commonForm" method="post">
 	<input type="hidden" id="curPage" name="curPage"/> <!-- 이동할 페이지 번호 -->
-	<input type="hidden" id="idx" name="idx"/>
+	<input type="hidden" id="idx" name="idx"/> <!-- 다운로드 파일 idx 번호 -->
+	<input type="hidden" id="fileName" name="fileName"/> <!-- 엑셀 파일 이름 -->
 </form>
 
 <!-- 페이징 처리 -->
@@ -49,6 +50,7 @@
 <a href="javascript:listPaging('${listPager.pageCnt }')">완전 끝 페이지</a>
 
 <button onclick="writeForm();">글작성</button>
+<button onclick="excelDownload();">엑셀 다운로드</button>
 
 <script type="text/javascript">
 	function listPaging(pageNum){
@@ -70,6 +72,12 @@
 	function download(idx){
 		$("#idx").val(idx);
 		$("#commonForm").prop("action", "/download.do");
+		$("#commonForm").submit();
+	}
+	
+	function excelDownload(){
+		$("#fileName").val("엑셀 다운로드 테스트");
+		$("#commonForm").prop("action", "/excelDownload.do");
 		$("#commonForm").submit();
 	}
 </script>
