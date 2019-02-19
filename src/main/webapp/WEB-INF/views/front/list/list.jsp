@@ -52,6 +52,13 @@
 <button onclick="writeForm();">글작성</button>
 <button onclick="excelDownload();">엑셀 다운로드</button>
 
+<div>
+	<form id="excelForm" action="/excelUpload.do" method="post" enctype="multipart/form-data">
+		<input type="file" name="excelFile"/>
+		<input type="submit" value="엑셀 업로드">
+	</form>
+</div>
+
 <script type="text/javascript">
 	function listPaging(pageNum){
 		$("#curPage").val(pageNum);

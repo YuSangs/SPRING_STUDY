@@ -120,7 +120,32 @@ public class MainController {
 		
 		List<Map<String, Object>> excelDataList = null;
 		
-		commonFile.ExcelDownloadPoi(response, excelDataList, param.get("fileName").toString());
+		commonFile.ExcelDownloadXls(response, excelDataList, param.get("fileName").toString());
 		
+	}
+	
+	/**
+	 * 엑셀 업로드 시도
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/excelUpload")
+	public void excelUplo(@RequestParam Map<String, Object> param, HttpServletRequest request, MultipartHttpServletRequest multi) throws Exception {
+		CommonFile commonFile = new CommonFile();
+		
+		List<Map<String, Object>> fileList = commonFile.fileUpload(multi, "upload/excel/");
+		param.put("STORED_FILE", fileList.get(0).get("stored_file").toString());
+		param.put("FILE_PATH", fileList.get(0).get("file_path").toString());
+		
+		List<Map<String, Object>> dataList = commonFile.excelUpload(request, param);
+		
+		System.out.println("엑셀 데이터 시작");
+		for(int i=0;i<dataList.size();i++) {
+			System.out.println(i+"번 엑셀 데이터");
+			System.out.println("data1 ::::: "+dataList.get(i).get("data1"));
+			System.out.println("data2 ::::: "+dataList.get(i).get("data2"));
+		}
+		System.out.println("엑셀 데이터 끝");
 	}
 }
