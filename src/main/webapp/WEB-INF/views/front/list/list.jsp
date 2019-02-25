@@ -87,4 +87,9 @@
 		$("#commonForm").prop("action", "/excelDownload.do");
 		$("#commonForm").submit();
 	}
+	
+	console.log("가져온 lang 값 다시 확인 :::: ${lang}");
+	console.log("ctx 값 확인 :::: ${ctx}");
+	
+	
 </script>

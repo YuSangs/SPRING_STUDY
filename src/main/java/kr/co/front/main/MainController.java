@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -42,9 +43,10 @@ public class MainController {
 	 * @param Map<String, Object>
 	 * @return ModelAndView
 	 * */
-	@RequestMapping("/list/list")
-	public ModelAndView list(@RequestParam Map<String, Object> param) throws Exception {
+	@RequestMapping("/{lang}/list/list")
+	public ModelAndView list(@PathVariable("lang") String lang, @RequestParam Map<String, Object> param) throws Exception {
 		ModelAndView mav = new ModelAndView("front/list/list");
+		mav.addObject("lang", lang);
 		
 		int countList = service.selectListCnt(param);
 		int curPage = 1;
@@ -68,7 +70,7 @@ public class MainController {
 	 * @return String
 	 * */
 	@RequestMapping("/list/writeForm")
-	public String writeForm(@RequestParam Map<String, Object> param) throws Exception {
+	public String writeForm(@PathVariable("lang") String lang, @RequestParam Map<String, Object> param) throws Exception {
 		
 		return "front/list/writeForm";
 	}
