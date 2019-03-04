@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ public class MainController {
 	
 	@Autowired
 	JavaMailSender mailSender;
+	
+	protected Log log = LogFactory.getLog(MainController.class);
 	
 	/**
 	 * 메인
@@ -93,9 +97,9 @@ public class MainController {
 		int result = service.writeProc(param, multi);
 		
 		if(result == 1) {
-			System.out.println("글작성 성공");
+			log.debug("글작성 성공");
 		}else {
-			System.out.println("글작성 실패");
+			log.debug("글작성 실패");
 		}
 		
 		return "redirect:/list/list.do";
@@ -148,13 +152,13 @@ public class MainController {
 		
 		List<Map<String, Object>> dataList = commonFile.excelUpload(request, param);
 		
-		System.out.println("엑셀 데이터 시작");
+		log.debug("엑셀 데이터 시작");
 		for(int i=0;i<dataList.size();i++) {
-			System.out.println(i+"번 엑셀 데이터");
-			System.out.println("data1 ::::: "+dataList.get(i).get("data1"));
-			System.out.println("data2 ::::: "+dataList.get(i).get("data2"));
+			log.debug(i+"번 엑셀 데이터");
+			log.debug("data1 ::::: "+dataList.get(i).get("data1"));
+			log.debug("data2 ::::: "+dataList.get(i).get("data2"));
 		}
-		System.out.println("엑셀 데이터 끝");
+		log.debug("엑셀 데이터 끝");
 	}
 	
 	/**
