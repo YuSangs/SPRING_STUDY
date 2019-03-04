@@ -39,6 +39,20 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- 메일 발송 -->
+		<!-- javax.mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.5.6</version>
+		</dependency>
+		<!-- spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+
 		<!-- 엑셀 업로드, 다운로드 (poi) -->
 		<!-- poi -->
 		<dependency>

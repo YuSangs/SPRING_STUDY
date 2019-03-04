@@ -1,5 +1,6 @@
 package kr.co.front.main;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.common.CommonFile;
 import kr.co.common.ListPager;
+import kr.co.common.MailUtil;
 
 @Controller
 public class MainController {
 
 	@Autowired
 	MainService service;
+	
+	@Autowired
+	JavaMailSender mailSender;
 	
 	/**
 	 * 메인
@@ -133,7 +139,7 @@ public class MainController {
 	 * @return String
 	 * */
 	@RequestMapping("/excelUpload")
-	public void excelUplo(@RequestParam Map<String, Object> param, HttpServletRequest request, MultipartHttpServletRequest multi) throws Exception {
+	public void excelUpload(@RequestParam Map<String, Object> param, HttpServletRequest request, MultipartHttpServletRequest multi) throws Exception {
 		CommonFile commonFile = new CommonFile();
 		
 		List<Map<String, Object>> fileList = commonFile.fileUpload(multi, "upload/excel/");
@@ -149,5 +155,35 @@ public class MainController {
 			System.out.println("data2 ::::: "+dataList.get(i).get("data2"));
 		}
 		System.out.println("엑셀 데이터 끝");
+	}
+	
+	/**
+	 * 게시판 글작성 페이지
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/mailSendForm")
+	public String mailSendForm() throws Exception {
+		
+		return "front/list/mailSend";
+	}
+	
+	/**
+	 * 메일 전송
+	 * 
+	 * @param Map<String, Object>
+	 * @return String
+	 * */
+	@RequestMapping("/mailSend")
+	public void mailSend(@RequestParam Map<String, Object> param, HttpServletRequest request) throws Exception {
+		MailUtil mailUtil = new MailUtil(mailSender);
+		File file = new File(request.getSession().getServletContext().getRealPath("/") + "upload/excel/1551665254711.jpg");
+		
+		mailUtil.setTo(param.get("to").toString());
+		mailUtil.setSubject(param.get("title").toString());
+		mailUtil.setText(param.get("content").toString());
+		mailUtil.setFile("테스트용.jpg", file);
+		mailUtil.mailSend();
 	}
 }

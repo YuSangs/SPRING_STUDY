@@ -85,6 +85,20 @@
 		<property name="dataSource" ref="dataSource" /> 
 	</bean> 
 	
+	<!-- 메일 발송 bean 생성 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/><!-- google smtp 서버 -->
+		<property name="port" value="587"/>
+		<property name="username" value="parou12@gmail.com"/>
+		<property name="password" value="akf5986248"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager"> 
 		<tx:attributes> 
 			<tx:method name="select*" rollback-for="Exception"/>

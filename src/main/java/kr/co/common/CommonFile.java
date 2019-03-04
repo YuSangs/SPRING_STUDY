@@ -52,7 +52,7 @@ public class CommonFile {
 		if(!dir.isDirectory()){
 			dir.mkdir();
 		}
-
+		
 		Iterator<String> iter = multi.getFileNames();
 		MultipartFile file = null;
 		
