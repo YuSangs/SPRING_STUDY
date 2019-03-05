@@ -52,5 +52,5 @@ public class MailUtil {
 	
 	public void mailSend() throws Exception {
 		mailSender.send(message);
-	}
+	} 
 }

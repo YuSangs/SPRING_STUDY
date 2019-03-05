@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.common.CommonFile;
+import kr.co.common.CommonUtil;
 import kr.co.common.ListPager;
 import kr.co.common.MailUtil;
 
@@ -70,6 +71,16 @@ public class MainController {
 		
 		mav.addObject("list", service.selectList(param));
 		mav.addObject("listPager", listPager);
+		
+		
+		
+		//랜덤 확인
+		CommonUtil commonUtil = new CommonUtil();
+		
+		commonUtil.createTempKey();
+		
+		
+		
 		return mav;
 	}
 	
