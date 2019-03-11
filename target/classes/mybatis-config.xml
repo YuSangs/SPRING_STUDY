@@ -11,8 +11,10 @@
 		
 		<typeAliases>
 			<!-- 기본 -->
-			<typeAlias type="java.lang.Object" alias="object"/>
-			<typeAlias type="java.util.Map" alias="param" />
+			<typeAlias type="java.lang.Object" alias="Object"/>
+			<typeAlias type="java.lang.String" alias="String"/>
+			<typeAlias type="java.lang.Integer" alias="Integer"/>
+			<typeAlias type="java.util.Map" alias="Map" />
 			
 			<!-- DTO -->
 			<typeAlias type="kr.co.front.main.MainDTO" alias="MainDTO"/>

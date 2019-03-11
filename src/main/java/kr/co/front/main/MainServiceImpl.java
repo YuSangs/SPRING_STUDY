@@ -14,7 +14,7 @@ public class MainServiceImpl extends CommonDAO implements MainService{
 
 	@Override
 	public List<?> selectMain(Map<String, Object> param) throws Exception{
-		return super.list("main.main", param);
+		return super.selectList("main.main", param);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class MainServiceImpl extends CommonDAO implements MainService{
 	
 	@Override
 	public List<?> selectList(Map<String, Object> param) throws Exception{
-		return super.list("main.selectList", param);
+		return super.selectList("main.selectList", param);
 	}
 
 	@Override
@@ -41,6 +41,6 @@ public class MainServiceImpl extends CommonDAO implements MainService{
 
 	@Override
 	public Map<String, Object> download(Map<String, Object> param) throws Exception {
-		return (Map<String, Object>) super.select("main.selectDownload", param);
+		return (Map<String, Object>) super.selectMap("main.selectDownload", param);
 	}
 }

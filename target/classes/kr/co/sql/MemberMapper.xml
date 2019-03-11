@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="member">
+		<!-- 회원 정보 가져오기 -->
+		<select id="selectMemberInfo" parameterType="Map" resultType="Map">
+			SELECT 
+				IDX
+				, USER_ID
+				, USER_AUTH
+				, REG_DATE
+				, UPD_DATE
+				, USER_NAME
+				, USER_EMAIL
+				, USER_PHONE
+				, CERTIFI_YN
+			FROM 
+				TBL_YS_MEMBER 
+			WHERE 
+				DEL_YN = 'N'
+				<if test="user_id != null">
+					AND USER_ID = #{user_id}
+				</if>
+				<if test="user_pw != null">
+					AND USER_PW = #{user_pw}
+				</if>
+				<if test="temp_key != null">
+					AND TEMP_KEY = #{temp_key}
+				</if>
+		</select>
+		
+		<!-- 회원정보 입력 -->
+		<insert id="insertMember" parameterType="Map">
+			INSERT INTO 
+				TBL_YS_MEMBER (USER_ID, USER_PW, USER_AUTH, REG_DATE, UPD_DATE, USER_NAME, USER_EMAIL, USER_PHONE, TEMP_KEY)
+				VALUES (#{user_id}, #{user_pw}, 'ROLE_USER', NOW(), NOW(), #{user_name}, #{user_email}, #{user_phone}, #{temp_key})
+		</insert>
+		
+		<!-- 회원 인증상태 변경 -->
+		<update id="updateMemberCerfitiYN" parameterType="Map">
+			UPDATE TBL_YS_MEMBER SET 
+				CERTIFI_YN = 'Y'
+			WHERE
+				USER_ID = #{user_id}
+		</update>
+	</mapper>

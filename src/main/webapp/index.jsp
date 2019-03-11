@@ -1,3 +1,3 @@
 <script type="text/javascript">
-	location.href="/ko/list/list.do";
+	location.href="/main/index.do";
 </script>

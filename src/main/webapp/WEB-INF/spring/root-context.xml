@@ -101,10 +101,11 @@
 	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager"> 
 		<tx:attributes> 
-			<tx:method name="select*" rollback-for="Exception"/>
-			<tx:method name="insert*" rollback-for="Exception"/>
-			<tx:method name="update*" rollback-for="Exception"/>
-			<tx:method name="delete*" rollback-for="Exception"/>
+<!-- 			<tx:method name="select*" rollback-for="Exception"/> -->
+<!-- 			<tx:method name="insert*" rollback-for="Exception"/> -->
+<!-- 			<tx:method name="update*" rollback-for="Exception"/> -->
+<!-- 			<tx:method name="delete*" rollback-for="Exception"/> -->
+			<tx:method name="*" rollback-for="Exception"/>
 		</tx:attributes> 
 	</tx:advice>
 	
@@ -112,5 +113,8 @@
 		<aop:pointcut id="transactionPointcut" expression="execution(* kr.co..*ServiceImpl.*(..))"/> 
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionPointcut" /> 
 	</aop:config>
+	
+	<!-- 기본 기능 클래스 -->
+	<bean id="commonUtil" class="kr.co.common.CommonUtil"/>
 	
 </beans>

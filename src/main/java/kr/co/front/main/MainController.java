@@ -37,15 +37,11 @@ public class MainController {
 	/**
 	 * 메인
 	 * 
-	 * @param Map<String, Object>
-	 * @return ModelAndView
+	 * @return String
 	 * */
-	@RequestMapping("/main/main")
-	public ModelAndView main(@RequestParam Map<String, Object> param) throws Exception {
-		ModelAndView mav = new ModelAndView("main/main");
-		
-		mav.addObject("mainList", service.selectMain(param));
-		return mav;
+	@RequestMapping("/main/index")
+	public String main() throws Exception {
+		return "front/main/index";
 	}
 	
 	/**

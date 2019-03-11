@@ -13,8 +13,12 @@ public class CommonDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	public List<Map<String, Object>> list(String statement, Map<String, Object> param) {
+	public List<Map<String, Object>> selectList(String statement, Map<String, Object> param) {
 		return sqlSession.selectList(statement, param);
+	}
+	
+	public Map<String, Object> selectMap(String statement, Map<String, Object> param) {
+		return sqlSession.selectOne(statement, param);
 	}
 
 	public Object select(String statement, Map<String, Object> param) {
