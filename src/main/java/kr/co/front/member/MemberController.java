@@ -57,7 +57,7 @@ public class MemberController {
 	
 	/**
 	 * 계정 인증 실행
-	 * 
+	 * 테스트
 	 * @param Map<String, Object>
 	 * @return Map<String, Object>
 	 * */
