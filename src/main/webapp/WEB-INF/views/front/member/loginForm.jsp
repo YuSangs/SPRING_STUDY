@@ -4,7 +4,7 @@
 <table>
 	<tr>
 		<th>아이디</th>
-		<td><input type="text" name="user_id" id="user_id" onchange="userIdChange(this);"/></td>
+		<td><input type="text" name="user_id" id="user_id"/></td>
 	</tr>
 	<tr>
 		<th>패스워드</th>
