@@ -35,9 +35,9 @@
 	<!-- MariaDB 데이터소스 -->
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://222.106.253.80:3306/ysboard?useSSL=false&amp;serverTimezone=UTC"/>
-		<property name="username" value="ysboard" />
-		<property name="password" value="inter_ysboard" />
+		<property name="url" value="jdbc:mysql://13.125.185.44:3306/yusangsDB?useSSL=false&amp;serverTimezone=UTC"/>
+		<property name="username" value="yusangs" />
+		<property name="password" value="yusangs" />
 		<property name="maxActive" value="10"/>
 		<property name="maxWait" value="6000"/>
 		<property name="poolPreparedStatements" value="true"/>
