@@ -17,7 +17,7 @@
 				, USER_PHONE
 				, CERTIFI_YN
 			FROM 
-				TBL_YS_MEMBER 
+				TBL_MEMBER 
 			WHERE 
 				DEL_YN = 'N'
 				<if test="user_id != null">
@@ -34,13 +34,13 @@
 		<!-- 회원정보 입력 -->
 		<insert id="insertMember" parameterType="Map">
 			INSERT INTO 
-				TBL_YS_MEMBER (USER_ID, USER_PW, USER_AUTH, REG_DATE, UPD_DATE, USER_NAME, USER_EMAIL, USER_PHONE, TEMP_KEY)
+				TBL_MEMBER (USER_ID, USER_PW, USER_AUTH, REG_DATE, UPD_DATE, USER_NAME, USER_EMAIL, USER_PHONE, TEMP_KEY)
 				VALUES (#{user_id}, #{user_pw}, 'ROLE_USER', NOW(), NOW(), #{user_name}, #{user_email}, #{user_phone}, #{temp_key})
 		</insert>
 		
 		<!-- 회원 인증상태 변경 -->
 		<update id="updateMemberCerfitiYN" parameterType="Map">
-			UPDATE TBL_YS_MEMBER SET 
+			UPDATE TBL_MEMBER SET 
 				CERTIFI_YN = 'Y'
 			WHERE
 				USER_ID = #{user_id}

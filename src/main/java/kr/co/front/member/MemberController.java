@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.front.main.MainController;
-
 @Controller
 public class MemberController {
 
-	protected Log log = LogFactory.getLog(MainController.class);
+	protected Log log = LogFactory.getLog(MemberController.class);
 	
 	@Autowired
 	MemberService service;

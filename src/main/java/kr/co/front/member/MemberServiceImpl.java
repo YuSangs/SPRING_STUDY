@@ -16,7 +16,6 @@ import kr.co.common.CommonDAO;
 import kr.co.common.CommonUtil;
 import kr.co.common.MailUtil;
 import kr.co.common.SessionVo;
-import kr.co.interceptor.LoggerInterceptor;
 
 @Service
 public class MemberServiceImpl extends CommonDAO implements MemberService{
@@ -81,7 +80,7 @@ public class MemberServiceImpl extends CommonDAO implements MemberService{
 		}
 		return json;
 	}
-
+	
 	@Override
 	public Map<String, Object> loginProc(Map<String, Object> param, HttpSession session) throws Exception {
 		Map<String, Object> json = new HashMap<String, Object>();

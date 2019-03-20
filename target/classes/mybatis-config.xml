@@ -15,8 +15,5 @@
 			<typeAlias type="java.lang.String" alias="String"/>
 			<typeAlias type="java.lang.Integer" alias="Integer"/>
 			<typeAlias type="java.util.Map" alias="Map" />
-			
-			<!-- DTO -->
-			<typeAlias type="kr.co.front.main.MainDTO" alias="MainDTO"/>
 		</typeAliases>
 	</configuration>
