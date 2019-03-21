@@ -16,4 +16,6 @@ public interface MemberService {
 
 	Map<String, Object> loginProc(Map<String, Object> param, HttpSession session) throws Exception;
 
+	String logoutProc(HttpSession session) throws Exception;
+
 }

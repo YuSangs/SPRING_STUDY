@@ -88,10 +88,22 @@ public class MemberController {
 	 * 로그인 실행
 	 * 
 	 * @param Map<String, Object>
+	 * @param HttpSession
 	 * @return Map<String, Object>
 	 * */
 	@RequestMapping("/member/loginProc")
 	public @ResponseBody Map<String, Object> loginProc(@RequestParam Map<String, Object> param, HttpSession session) throws Exception {
 		return service.loginProc(param, session);
+	}
+	
+	/**
+	 * 로그아웃 실행
+	 * 
+	 * @param HttpSession
+	 * @return String
+	 * */
+	@RequestMapping("/member/logoutProc")
+	public String logoutProc(HttpSession session) throws Exception {
+		return service.logoutProc(session);
 	}
 }

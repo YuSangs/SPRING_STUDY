@@ -10,7 +10,7 @@
 		</c:when>
 		<c:otherwise>
 			${sessionScope.sessionVo.login_id }님 안녕하세요
-			<a href="/member/logout.do">로그아웃</a>
+			<a href="/member/logoutProc.do">로그아웃</a>
 		</c:otherwise>
 	</c:choose>
 </div>

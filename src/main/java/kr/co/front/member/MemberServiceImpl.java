@@ -105,4 +105,10 @@ public class MemberServiceImpl extends CommonDAO implements MemberService{
 		
 		return json;
 	}
+
+	@Override
+	public String logoutProc(HttpSession session) throws Exception {
+		session.removeAttribute("sessionVo");
+		return "redirect:/main/index.do";
+	}
 }
