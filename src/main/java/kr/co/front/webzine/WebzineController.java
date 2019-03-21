@@ -21,7 +21,7 @@ public class WebzineController {
 	 * @return ModelAndView
 	 * */
 	@RequestMapping(value="/webzineList/listProc")
-	public ModelAndView listProc(@RequestParam Map<String, Object> param) {
+	public ModelAndView listProc(@RequestParam Map<String, Object> param) throws Exception {
 		return service.listProc(param);
 	}
 }

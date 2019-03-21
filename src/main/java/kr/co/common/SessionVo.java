@@ -2,9 +2,16 @@ package kr.co.common;
 
 public class SessionVo {
 
+	private int login_idx;
 	private String login_id;
 	private String login_auth;
 	
+	public int getLogin_idx() {
+		return login_idx;
+	}
+	public void setLogin_idx(int login_idx) {
+		this.login_idx = login_idx;
+	}
 	public String getLogin_id() {
 		return login_id;
 	}

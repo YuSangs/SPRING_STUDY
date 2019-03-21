@@ -5,4 +5,78 @@
 	
 	<mapper namespace="webzine">
 		
+		<!-- 웹진형 게시판 갯수 -->
+		<select id="selectWebzineCnt" parameterType="Map" resultType="Object">
+			SELECT 
+				COUNT(W.IDX) 
+			FROM 
+				TBL_WEBZINE W INNER JOIN 
+				TBL_MEMBER M ON
+				W.WRITER_IDX = M.IDX INNER JOIN
+				TBL_FILE F ON
+				W.THUMBNAIL_IDX = F.IDX
+			WHERE 
+				W.DEL_YN = 'N'
+				AND M.DEL_YN = 'N'
+				AND F.DEL_YN = 'N'
+				<if test="search_word != null">
+					<choose>
+						<when test="search_cate == 'title'">
+							AND W.TITLE = #{search_word}
+						</when>
+						<otherwise>
+							AND M.USER_NAME = #{search_word}
+						</otherwise>
+					</choose>
+				</if>
+		</select>
+		
+		<!-- 웹진형 게시판 -->
+		<select id="selectWebzineList" parameterType="Map" resultType="Map">
+			SELECT 
+				*
+			FROM
+				(SELECT 
+					*
+					,@ROWNUM:=@ROWNUM+1 AS ROWNUM
+				FROM
+					(SELECT 
+						W.IDX
+						,W.TITLE
+						,W.CONTENT
+						,DATE_FORMAT(W.REG_DATE, "%Y.%m.%d") AS REG_DATE
+						,W.VIEW_CNT
+						,W.WRITER_IDX
+						,W.THUMBNAIL_IDX
+						,M.USER_NAME
+						,F.FILE_ORI
+						,F.FILE_STO
+						,F.FILE_PATH
+					FROM 
+						TBL_WEBZINE W INNER JOIN 
+						TBL_MEMBER M ON
+						W.WRITER_IDX = M.IDX INNER JOIN
+						TBL_FILE F ON
+						W.THUMBNAIL_IDX = F.IDX
+					WHERE
+						W.DEL_YN = 'N'
+						AND M.DEL_YN = 'N'
+						AND F.DEL_YN = 'N'
+						<if test="search_word != null">
+							<choose>
+								<when test="search_cate == 'title'">
+									AND W.TITLE = #{search_word}
+								</when>
+								<otherwise>
+									AND M.USER_NAME = #{search_word}
+								</otherwise>
+							</choose>
+						</if>
+					ORDER BY
+						W.IDX DESC) A
+					,(SELECT @ROWNUM:=0) R) B
+			WHERE
+				ROWNUM BETWEEN #{begin} AND #{end}
+		</select>
+		
 	</mapper>

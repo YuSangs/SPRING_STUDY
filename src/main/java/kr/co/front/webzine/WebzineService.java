@@ -6,6 +6,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface WebzineService {
 
-	ModelAndView listProc(Map<String, Object> param);
+	ModelAndView listProc(Map<String, Object> param) throws Exception;
 
 }
