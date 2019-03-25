@@ -4,6 +4,7 @@ public class SessionVo {
 
 	private int login_idx;
 	private String login_id;
+	private String login_name;
 	private String login_auth;
 	
 	public int getLogin_idx() {
@@ -17,6 +18,12 @@ public class SessionVo {
 	}
 	public void setLogin_id(String login_id) {
 		this.login_id = login_id;
+	}
+	public String getLogin_name() {
+		return login_name;
+	}
+	public void setLogin_name(String login_name) {
+		this.login_name = login_name;
 	}
 	public String getLogin_auth() {
 		return login_auth;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,5 +24,27 @@ public class WebzineController {
 	@RequestMapping(value="/webzineList/listProc")
 	public ModelAndView listProc(@RequestParam Map<String, Object> param) throws Exception {
 		return service.listProc(param);
+	}
+	
+	/**
+	 * 웹진형 글작성 페이지
+	 * 
+	 * @return String
+	 * */
+	@RequestMapping(value="/webzineList/writeForm")
+	public String writeForm() throws Exception {
+		return "front/webzineList/webzineF";
+	}
+	
+	/**
+	 * 웹진형 글작성 Proc
+	 * 
+	 * @param Map<String, Object>
+	 * @param MultipartHttpServletRequest
+	 * @return String
+	 * */
+	@RequestMapping(value="/webzineList/writeProc")
+	public ModelAndView writeProc(@RequestParam Map<String, Object> param, MultipartHttpServletRequest multi) throws Exception {
+		return service.writeProc(param, multi);
 	}
 }

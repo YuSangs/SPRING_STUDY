@@ -70,8 +70,8 @@ public class CommonFile {
 				storedFile = System.currentTimeMillis() +"."+extension;
 				
 				//DB에 저장할 파일 이름
-				map.put("origin_file", originalFile);
-				map.put("stored_file", storedFile);
+				map.put("file_ori", originalFile);
+				map.put("file_sto", storedFile);
 				map.put("file_path", path);
 				fileList.add(map);
 				

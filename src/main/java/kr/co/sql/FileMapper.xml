@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="file">
+		
+		<insert id="insertFile" parameterType="Map">
+			INSERT INTO 
+				TBL_FILE (FILE_ORI, FILE_STO, REG_DATE, FILE_PATH) 
+				VALUES (#{file_ori}, #{file_sto}, NOW(), #{file_path})
+				
+			<selectKey resultType="Integer" keyProperty="thumbnail_idx" order="AFTER">
+				SELECT
+					IDX 
+				FROM 
+					TBL_FILE 
+				ORDER BY 
+					IDX DESC LIMIT 1
+			</selectKey>
+		</insert>
+		
+	</mapper>

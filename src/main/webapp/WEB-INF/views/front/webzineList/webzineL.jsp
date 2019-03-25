@@ -27,7 +27,7 @@
 							${(listPager.listCnt - status.index) - ((listPager.curPage - 1) * 10 )}
 							<input type="hidden" value="${list.IDX }"/>
 						</td>
-						<td><img alt="섬네일" src="${list.FILE_PATH }/${list.FILE_STO}"/></td>
+						<td><img alt="섬네일" src="${list.FILE_PATH }${list.FILE_STO}"/></td>
 						<td>${list.TITLE }</td>
 						<td>${list.CONTENT }</td>
 						<td>${list.USER_NAME }</td>
@@ -40,7 +40,7 @@
 	</tbody>
 </table>
 
-<input type="button" value="글작성" onclick="webzineForm();"/>
+<input type="button" value="글작성" onclick="writeForm();"/>
 
 <!-- 공통 폼태그 -->
 <form id="commonForm" method="post">
@@ -69,14 +69,28 @@
 
 <!-- 스크립트 -->
 <script type="text/javascript">
+	$(document).ready(function(){
+		var msg = "${msg}";
+		if(msg != ""){
+			alert(msg);
+		}
+	});
+
 	function pagingProc(curPage){
 		$("#curPage").val(curPage);
 		$("#commonForm").prop("action", "/webzineList/listProc.do");
 		$("#commonForm").submit();
 	}
 	
-	function webzineForm(){
+	function writeForm(){
 		var session = "${sessionScope.sessionVo}";
 		
+		if(session == ""){
+			alert("로그인해야 작성이 가능합니다.");
+			return;
+		}
+		
+		$("#commonForm").prop("action", "/webzineList/writeForm.do");
+		$("#commonForm").submit();
 	}
 </script>

@@ -79,4 +79,10 @@
 				ROWNUM BETWEEN #{begin} AND #{end}
 		</select>
 		
+		<insert id="insertWebzineList" parameterType="Map">
+			INSERT INTO 
+				TBL_WEBZINE (TITLE, CONTENT, REG_DATE, UPD_DATE, WRITER_IDX, THUMBNAIL_IDX) 
+				VALUES (#{title}, #{content}, NOW(), NOW(), #{writer_idx}, #{thumbnail_idx})
+		</insert>
+		
 	</mapper>

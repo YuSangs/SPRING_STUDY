@@ -9,5 +9,8 @@
 </ul>
 
 <script type="text/javascript">
-	
+	var blockTF = ${blockTF};
+	if(blockTF == true){
+		alert("잘못된 접근입니다.");
+	}
 </script>

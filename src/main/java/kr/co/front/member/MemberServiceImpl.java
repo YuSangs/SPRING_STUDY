@@ -94,6 +94,7 @@ public class MemberServiceImpl extends CommonDAO implements MemberService{
 				SessionVo sessionVo = new SessionVo();
 				sessionVo.setLogin_idx(Integer.parseInt(memberInfo.get("IDX").toString()));
 				sessionVo.setLogin_id(memberInfo.get("USER_ID").toString());
+				sessionVo.setLogin_name(memberInfo.get("USER_NAME").toString());
 				sessionVo.setLogin_auth(memberInfo.get("USER_AUTH").toString());
 				session.setAttribute("sessionVo", sessionVo);
 			}else {

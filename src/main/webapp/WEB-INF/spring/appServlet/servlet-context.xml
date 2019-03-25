@@ -42,6 +42,10 @@
 			<mapping path="/**"/>
 			<beans:bean id="loggerInterceptor" class="kr.co.interceptor.LoggerInterceptor"></beans:bean>
 		</interceptor>
+		<interceptor>
+			<mapping path="/webzineList/write*"/>
+			<beans:bean id="denyInterceptor" class="kr.co.interceptor.DenyInterceptor"></beans:bean>
+		</interceptor>
 	</interceptors>
 	
 	<context:component-scan base-package="kr" use-default-filters="false">
