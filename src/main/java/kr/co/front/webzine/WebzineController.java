@@ -41,10 +41,21 @@ public class WebzineController {
 	 * 
 	 * @param Map<String, Object>
 	 * @param MultipartHttpServletRequest
-	 * @return String
+	 * @return ModelAndView
 	 * */
 	@RequestMapping(value="/webzineList/writeProc")
 	public ModelAndView writeProc(@RequestParam Map<String, Object> param, MultipartHttpServletRequest multi) throws Exception {
 		return service.writeProc(param, multi);
+	}
+	
+	/**
+	 * 웹진형 상세 페이지
+	 * 
+	 * @param Map<String, Object>
+	 * @return ModelAndView
+	 * */
+	@RequestMapping(value="/webzineList/viewProc")
+	public ModelAndView viewProc(@RequestParam Map<String, Object> param) throws Exception {
+		return service.viewProc(param);
 	}
 }

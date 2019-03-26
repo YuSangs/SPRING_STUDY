@@ -85,4 +85,34 @@
 				VALUES (#{title}, #{content}, NOW(), NOW(), #{writer_idx}, #{thumbnail_idx})
 		</insert>
 		
+		<update id="updateViewCnt" parameterType="Map">
+			UPDATE 
+				TBL_WEBZINE 
+			SET 
+				VIEW_CNT = VIEW_CNT + 1
+			WHERE 
+				IDX = #{list_idx}
+		</update>
+		
+		<select id="selectWebzineView" parameterType="Map" resultType="Map">
+			SELECT 
+				W.IDX
+				,W.TITLE
+				,W.CONTENT
+				,DATE_FORMAT(W.REG_DATE, "%Y.%m.%d") AS REG_DATE
+				,W.VIEW_CNT
+				,M.USER_NAME
+				,F.FILE_ORI
+				,F.FILE_STO
+				,F.FILE_PATH
+			FROM
+				TBL_WEBZINE W INNER JOIN 
+				TBL_MEMBER M ON
+				W.WRITER_IDX = M.IDX INNER JOIN
+				TBL_FILE F ON
+				W.THUMBNAIL_IDX = F.IDX
+			WHERE
+				W.IDX = #{list_idx}
+		</select>
+		
 	</mapper>

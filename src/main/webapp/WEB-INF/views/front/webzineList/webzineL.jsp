@@ -22,18 +22,17 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${webzineList }" var="list" varStatus="status">
-					<tr>
-						<td>
-							${(listPager.listCnt - status.index) - ((listPager.curPage - 1) * 10 )}
-							<input type="hidden" value="${list.IDX }"/>
-						</td>
-						<td><img alt="섬네일" src="${list.FILE_PATH }${list.FILE_STO}"/></td>
-						<td>${list.TITLE }</td>
-						<td>${list.CONTENT }</td>
-						<td>${list.USER_NAME }</td>
-						<td>${list.VIEW_CNT }</td>
-						<td>${list.REG_DATE }</td>
-					</tr>
+						<tr class="POINT" onclick="viewProc(${list.IDX });">
+							<td>
+								${(listPager.listCnt - status.index) - ((listPager.curPage - 1) * 10 )}
+							</td>
+							<td><img alt="섬네일" src="${list.FILE_PATH }${list.FILE_STO}"/></td>
+							<td>${list.TITLE }</td>
+							<td>${list.CONTENT }</td>
+							<td>${list.USER_NAME }</td>
+							<td>${list.VIEW_CNT }</td>
+							<td>${list.REG_DATE }</td>
+						</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -45,6 +44,7 @@
 <!-- 공통 폼태그 -->
 <form id="commonForm" method="post">
 	<input type="hidden" id="curPage" name="curPage"/>
+	<input type="hidden" id="list_idx" name="list_idx"/>
 </form>
 
 <!-- 페이징 -->
@@ -91,6 +91,12 @@
 		}
 		
 		$("#commonForm").prop("action", "/webzineList/writeForm.do");
+		$("#commonForm").submit();
+	}
+	
+	function viewProc(list_idx){
+		$("#list_idx").val(list_idx);
+		$("#commonForm").prop("action", "/webzineList/viewProc.do");
 		$("#commonForm").submit();
 	}
 </script>

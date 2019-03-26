@@ -75,4 +75,15 @@ public class WebzineServiceImpl extends CommonDAO implements WebzineService{
 		
 		return mv;
 	}
+
+	@Override
+	public ModelAndView viewProc(Map<String, Object> param) throws Exception {
+		ModelAndView mv = new ModelAndView("front/webzineList/webzineV");
+		
+		if(super.update("webzine.updateViewCnt", param) == 1) {
+			 mv.addObject("webzineView", super.selectMap("webzine.selectWebzineView", param));
+		}
+		
+		return mv;
+	}
 }

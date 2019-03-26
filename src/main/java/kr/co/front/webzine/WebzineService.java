@@ -12,5 +12,7 @@ public interface WebzineService {
 	ModelAndView listProc(Map<String, Object> param) throws Exception;
 
 	ModelAndView writeProc(Map<String, Object> param, MultipartHttpServletRequest multi) throws Exception;
+
+	ModelAndView viewProc(Map<String, Object> param) throws Exception;
 	
 }
